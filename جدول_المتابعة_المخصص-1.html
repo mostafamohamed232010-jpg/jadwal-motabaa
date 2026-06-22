@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جدول المتابعة الأسبوعية</title>
+<style>
+body{font-family:Tahoma,Arial,sans-serif;background:#f5f7fb;margin:0;padding:20px;}
+.container{max-width:1300px;margin:auto;background:#fff;padding:20px;border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,.1);}
+h2{text-align:center;color:#2f4f8f;}
+table{width:100%;border-collapse:collapse;}
+th,td{border:2px solid #2f4f8f;padding:12px;text-align:center;}
+th{background:#eef3ff;}
+td.name{text-align:right;font-weight:bold;min-width:280px;}
+input[type="checkbox"]{width:22px;height:22px;cursor:pointer;}
+</style>
+</head>
+<body>
+<div class="container">
+<h2>الأسبوع</h2>
+<table>
+<thead>
+<tr>
+<th>الاسم</th>
+<th>اليوم الأول<br>22/6</th>
+<th>اليوم الثاني<br>23/6</th>
+<th>اليوم الثالث<br>24/6</th>
+<th>اليوم الرابع<br>25/6</th>
+<th>اليوم الخامس<br>26/6</th>
+<th>اليوم السادس<br>27/6</th>
+<th>اليوم السابع<br>28/6</th>
+<th>اليوم الثامن<br>29/6</th>
+</tr>
+</thead>
+<tbody id="tableBody"></tbody>
+</table>
+</div>
+<script>
+const names=["مصطفى عمرو و عبدالله مبارك","مصطفى محمد و هاني عاطف","أحمد سمير و محمد منصور","عبدالعظيم رويس و محمد عبدالله","محمد عبدالحسيب و سعيد أحمد"];
+const body=document.getElementById('tableBody');
+names.forEach((name,i)=>{
+let row=`<tr><td class="name">${name}</td>`;
+for(let d=0;d<8;d++){
+const key=`r${i}c${d}`;
+const checked=localStorage.getItem(key)==='true';
+row+=`<td><input type="checkbox" ${checked?'checked':''} onchange="saveCheck('${key}',this.checked)"></td>`;
+}
+row+='</tr>';
+body.innerHTML+=row;
+});
+function saveCheck(key,value){localStorage.setItem(key,value);}
+</script>
+</body>
+</html>
